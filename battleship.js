@@ -1,3 +1,13 @@
+class Player {
+    constructor(Board) {
+        this.Board = Board;
+    }
+
+    attack(Board, Col, Row) {
+        return Board.receiveAttack(Col, Row);
+    }
+}
+
 class Ship {
     constructor(length) {
         this.length = length;
@@ -60,4 +70,4 @@ class Gameboard {
     }
 }
 
-module.exports = { Ship, Gameboard }
+module.exports = { Ship, Gameboard, Player }

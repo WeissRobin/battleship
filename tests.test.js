@@ -1,4 +1,4 @@
-const { Ship, Gameboard } = require('./battleship');
+const { Ship, Gameboard, Player } = require('./battleship');
 
 it('Sunk test no. 1 (sunked)', () => {
     let ship = new Ship(3);
@@ -106,7 +106,7 @@ it('Place ship test vertical', () => {
           1, 2, 3, 4, 5,
           6, 7, 8, 9, 10
         ]
-    }); 
+    });
 })
 
 it('Attack test (true)', () => {
@@ -144,4 +144,59 @@ it('Sunked ship', () => {
         _Gameboard.receiveAttack(1, 3);
         expect(_ship.sunk).toBeTruthy();
         expect(_ship.damage).toBe(3);
+})
+
+it('Player can hit enemy board test', () => {
+    let redBoard = new Gameboard();
+    let redShip = new Ship(3);
+    redBoard.placeShip(redShip, 1, 1, 'horizontal');
+
+    let blueBoard = new Gameboard();
+  
+    let bluePlayer = new Player(blueBoard);
+    let redPlayer = new Player(redBoard);
+    expect(redPlayer.Board.Board).toEqual({
+      '1': [
+        redShip, redShip, redShip, 4,  5,
+        6, 7, 8, 9, 10
+      ],
+      '2': [
+        1, 2, 3, 4,  5,
+        6, 7, 8, 9, 10
+      ],
+      '3': [
+        1, 2, 3, 4,  5,
+        6, 7, 8, 9, 10
+      ],
+      '4': [
+        1, 2, 3, 4,  5,
+        6, 7, 8, 9, 10
+      ],
+      '5': [
+        1, 2, 3, 4,  5,
+        6, 7, 8, 9, 10
+      ],
+      '6': [
+        1, 2, 3, 4,  5,
+        6, 7, 8, 9, 10
+      ],
+      '7': [
+        1, 2, 3, 4,  5,
+        6, 7, 8, 9, 10
+      ],
+      '8': [
+        1, 2, 3, 4,  5,
+        6, 7, 8, 9, 10
+      ],
+      '9': [
+        1, 2, 3, 4,  5,
+        6, 7, 8, 9, 10
+      ],
+      '10': [
+        1, 2, 3, 4,  5,
+        6, 7, 8, 9, 10
+      ]
+    });
+    expect(bluePlayer.attack(redPlayer.Board, 1, 1)).toBeTruthy();
+    expect(redShip.damage).toBe(1);
 })
