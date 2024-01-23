@@ -200,3 +200,11 @@ it('Player can hit enemy board test', () => {
     expect(bluePlayer.attack(redPlayer.Board, 1, 1)).toBeTruthy();
     expect(redShip.damage).toBe(1);
 })
+
+it('Coors has been already attacked', () => {
+    let redBoard = new Gameboard();
+    let redShip = new Ship(3);
+
+    redBoard.placeShip(redShip, 1, 1);
+    redBoard.receiveAttack(1, 1);
+})
