@@ -77,6 +77,8 @@ class Gameboard {
     }
 
     displayBoard(Element) {
+        let letter = document.createElement('p');
+        letter.textContent = 'A';
         this.Columns.forEach(Col => {
             const boardColumn = document.createElement('div');
             this.Rows.forEach(Row => {
@@ -126,7 +128,7 @@ class Gameboard {
                 const Col = Cell.getAttribute('data-col');
                 const Row = Cell.getAttribute('data-row');
 
-                if (Cell.textContent === '❌') {
+                if (Cell.textContent === '❌' || Cell.textContent === Engine.getDefender().Symbol) {
                     return;
                 } else {
                     if (Engine.attackRound(Col, Row)) {
@@ -207,28 +209,55 @@ const Game = (()=> {
     const redBoard = document.querySelector('.Red-player');
     const blueBoard = document.querySelector('.Blue-player');
 
+    const Ships = document.querySelectorAll('.ship');
+    
+    redBoard.addEventListener('dragover', dragOver);
+    redBoard.addEventListener('drop', drop);
+
+    function dragStart(e) {
+        e.dataTransfer.setData('text/plain', e.target.classList[1]); // přenesení dat (název třídy lodi)
+    }    
+       
+    function dragOver(e) {
+        e.preventDefault();
+    }
+    
+    function drop(e) {
+        e.preventDefault();
+        console.log(e.target);
+        const shipData = e.dataTransfer.getData('text/plain');
+        const ship = document.querySelector(`.${shipData}`);
+     
+        e.target.appendChild(ship);
+    }
+
+    function handleRotate(event) {
+        const Ship = event.target;
+        let Rotation = Ship.getAttribute('data-rotation');
+        Rotation = (Rotation === 'horizontal') ? 'vertical' : 'horizontal';
+        Ship.setAttribute('data-rotation', Rotation);
+    }
+
+    Ships.forEach(Ship => {
+        Ship.addEventListener('dragstart', dragStart);
+        Ship.addEventListener('click', handleRotate);
+    });
+
     const gameOver = document.querySelector('.game-over');
     const currPlayer = document.querySelector('.current-player');
 
     const restartButton = document.querySelector('.restart-button');
     const startButton = document.querySelector('.start-button');
-
-    const DefBoard = document.querySelector(`.${Engine.getDefender().ID}-player`);
-    const AtkBoard = document.querySelector(`.${Engine.getAttacker().ID}-player`);
-
-    AtkBoard.style.pointerEvents = 'none';
-    DefBoard.style.pointerEvents = 'none';
     
     Engine.redBoard.displayBoard(redBoard);
     Engine.blueBoard.displayBoard(blueBoard);
-   
-    Engine.redBoard.boardClickHandeler(redBoard);
-    Engine.blueBoard.boardClickHandeler(blueBoard);
 
     startButton.addEventListener('click', () => {
         Engine.startGame();
         UpdateUI();
         startButton.style.display = 'none';
+        Engine.redBoard.boardClickHandeler(redBoard);
+        Engine.blueBoard.boardClickHandeler(blueBoard);
     });
 
     restartButton.addEventListener('click', () => {
@@ -237,7 +266,6 @@ const Game = (()=> {
         gameOver.style.display = 'none';
         restartButton.style.display = 'none';
         allCells.forEach(Cell => Cell.textContent = '');
-        console.log(allCells);
         UpdateUI();
     });
 

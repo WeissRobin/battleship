@@ -43,6 +43,18 @@ h2 {
   background-color: #e6e6e6;
 }
 
+.board-grid {
+  display: grid;
+  grid-template-areas: "player player" "empty letter" "number grid";
+}
+.board-grid .board {
+  grid-area: grid;
+}
+.board-grid h2 {
+  grid-area: player;
+  text-align: center;
+}
+
 .ship-destroy {
   background-color: blue !important;
 }
@@ -76,4 +88,60 @@ h2 {
   padding: 0.2em 0.5em;
   top: 20%;
   cursor: pointer;
+}
+
+.letter-coors {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.2rem;
+  grid-area: letter;
+}
+.letter-coors span {
+  flex-basis: 20px;
+  text-align: center;
+}
+
+.number-coors {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.2rem;
+  grid-area: number;
+}
+.number-coors span {
+  flex-basis: 20px;
+  text-align: center;
+  padding-inline: 0.3em;
+}
+
+.ship {
+  height: 40px;
+  background-color: red;
+  position: relative;
+  z-index: 3;
+}
+.ship[data-rotation=vertical] {
+  transform: rotate(0deg);
+}
+.ship[data-rotation=horizontal] {
+  transform: rotate(90deg) translateY(40px);
+}
+
+[data-width="2"] {
+  width: 85px;
+}
+
+[data-width="3"] {
+  width: 125px;
+}
+
+[data-width="4"] {
+  width: 165px;
+}
+
+[data-width="5"] {
+  width: 205px;
 }/*# sourceMappingURL=battleship.css.map */

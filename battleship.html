@@ -15,14 +15,67 @@
     <button class="restart-button">Restart</button>
     <button class="start-button">Start</button>
     <section class="boards-wrapper">
-        <div>
+        <div class="board-grid">       
             <h2>Red Board</h2>
+            <div class="letter-coors">
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+                <span>D</span>
+                <span>E</span>
+                <span>F</span>
+                <span>G</span>
+                <span>H</span>
+                <span>I</span>
+                <span>J</span>
+            </div>
+            <div class="number-coors">
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+                <span>6</span>
+                <span>7</span>
+                <span>8</span>
+                <span>9</span>
+                <span>10</span>
+            </div>
             <div class="Red-player board"></div>
         </div>
-        <div>
+        <div class="board-grid">
             <h2>Blue Board</h2>
+            <div class="letter-coors">
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+                <span>D</span>
+                <span>E</span>
+                <span>F</span>
+                <span>G</span>
+                <span>H</span>
+                <span>I</span>
+                <span>J</span>
+            </div>
+            <div class="number-coors">
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+                <span>6</span>
+                <span>7</span>
+                <span>8</span>
+                <span>9</span>
+                <span>10</span>
+            </div>
             <div class="Blue-player board"></div>
         </div>
     </section>
+    <div class="ship carrier" data-width="5" draggable="true" data-rotation="vertical"></div>
+    <div class="ship battleship" data-width="4" draggable="true" data-rotation="vertical"></div>
+    <div class="ship cruiser" data-width="3" draggable="true" data-rotation="vertical"></div>
+    <div class="ship submarine" data-width="3" draggable="true" data-rotation="vertical"></div>
+    <div class="ship destroy" data-width="2" draggable="true" data-rotation="vertical"></div>
 </body>
 </html>

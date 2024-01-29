@@ -40,6 +40,23 @@ h2 { font-weight: 400; }
     }
 }
 
+.board-grid {
+    display: grid;
+    grid-template-areas: 
+    'player player'
+    'empty letter'
+    'number grid';
+
+    .board {
+        grid-area: grid;
+    }
+
+    h2 {
+        grid-area: player;
+        text-align: center;
+    }
+}
+
 .ship-destroy {
     background-color: blue !important;
 }
@@ -73,4 +90,60 @@ h2 { font-weight: 400; }
     padding: .2em .5em;
     top: 20%;
     cursor: pointer;
+}
+
+.letter-coors {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.2rem;
+    grid-area: letter;
+    span {
+        flex-basis: 20px;
+        text-align: center;
+    }
+}
+
+.number-coors {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.2rem;
+    grid-area: number;
+    span {
+        flex-basis: 20px;
+        text-align: center;
+        padding-inline: .3em;
+    }
+}
+
+.ship {
+    height: 40px;
+    background-color: red;
+    position: relative;
+    z-index: 3;
+    &[data-rotation='vertical'] {
+        transform: rotate(0deg);
+    }
+    &[data-rotation='horizontal'] {
+        transform: rotate(90deg) translateY(40px);
+    }
+}
+
+[data-width='2'] {
+    width: 85px;
+}
+
+[data-width='3'] {
+    width: 125px;
+}
+
+[data-width='4'] {
+    width: 165px;
+}
+
+[data-width='5'] {
+    width: 205px;
 }
